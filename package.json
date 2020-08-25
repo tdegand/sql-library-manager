@@ -1,0 +1,12 @@
+{
+  "name": "sql-library-manager",
+  "version": "1.0.0",
+  "description": "A Library application built using the CRUD principles from SQL in node.js using express and sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
