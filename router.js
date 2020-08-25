@@ -6,8 +6,8 @@ router.get('/', (req, res) => {
     res.redirect('/books');
 })
 //All books
-router.get('/books', (req, res) => {
-    res.render('index')
+router.get('/books', (req, res, next) => {
+        res.render('index')  
 })
 //new book form route
 router.get('/books/new', (req, res) => {
