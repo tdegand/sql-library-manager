@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 //import routes
-const routes = require('./routes.js');
+const routes = require('./router.js');
 
 //serves all static files
 app.use(express.static('public'))
