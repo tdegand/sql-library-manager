@@ -37,10 +37,5 @@ router.post('/books/:id/delete', (req, res) => {
     res.render('new-book')
 })
 
-router.get("*", (res, req, next) => {
-        const err = new Error()
-        res.redirect('/error')
-})
-
 
 module.exports = router
