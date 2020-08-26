@@ -9,10 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          allowNull: false,
+          msg: "Please provide book title"
+        }
       },
       author: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          allowNull: false,
+          msg: "Please provide Author name"
+        }
       },
       genre: {
         type: Sequelize.STRING
