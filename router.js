@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const book = require('./models/book')
+const Sequelize = require("sequelize");
 
 //index page redirects to all books
 router.get('/', (req, res) => {
@@ -7,7 +9,9 @@ router.get('/', (req, res) => {
 })
 //All books
 router.get('/books', (req, res, next) => {
-        res.render('index')  
+        book.findAll().then(books => {
+            res.render('index', {books})  
+        })      
 })
 //new book form route
 router.get('/books/new', (req, res) => {

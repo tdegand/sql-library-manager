@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const book = require('./models/book')
 const Sequelize = require("sequelize")
 
 //check connection to DB
@@ -22,6 +21,9 @@ sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`);
   })
+  .catch(err => {
+    console.error('Could not create database & tables..')
+  })
 
 //import routes
 const routes = require("./router.js");
@@ -38,7 +40,7 @@ app.use(routes);
 
 //handles errors
 app.use(function (err, req, res, next) {
-	console.error(error.stack);
+	console.error(err);
 });
 
 const PORT = process.env.PORT || 3000;
