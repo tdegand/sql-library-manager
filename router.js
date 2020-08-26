@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const book = require('./models/book')
+const { Book } = require('./models')
 const Sequelize = require("sequelize");
 
 //index page redirects to all books
@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 })
 //All books
 router.get('/books', (req, res, next) => {
-        book.findAll().then(books => {
-            res.render('index', {books})  
+        Book.findAll().then(books => {
+            res.render('index', { books })  
         })      
 })
 //new book form route
@@ -32,6 +32,11 @@ router.post('/books/:id', (req, res) => {
 //deletes a book
 router.post('/books/:id/delete', (req, res) => {
     res.render('new-book')
+})
+
+router.get("*", (res, req, next) => {
+        const err = new Error()
+        res.redirect('/error')
 })
 
 
