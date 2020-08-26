@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Book } = require('./models')
 const Sequelize = require("sequelize");
+const { Op, where } = require("sequelize");
 
 //index page redirects to all books
 router.get('/', (req, res) => {
@@ -23,7 +24,9 @@ router.post('/books/new', (req, res) => {
 })
 //shows the book detail form
 router.get('/books/:id', (req, res) => {
-    res.render('update-book')
+        Book.findByPk(req.params.id).then(book => {
+            res.render('update-book', { book })
+        }) 
 })
 //updates the book info
 router.post('/books/:id', (req, res) => {
