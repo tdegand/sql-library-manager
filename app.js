@@ -43,8 +43,10 @@ app.set("view engine", "pug");
 app.use(routes);
 
 //404 handler
-app.use((err, req, res, next) => {
-  res.status(404).send('Page cannot be found', { err: err.stack })
+app.use((req, res, next) => {
+  const err = new Error('Page not found')
+  err.status = 404
+  res.render('page-not-found.pug', { err })
 })
 
 /* Global Error Handler */
