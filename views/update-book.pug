@@ -2,11 +2,12 @@ extends layout.pug
 
 block content
     h1 Update Book
-    each error in errors
-            h2 Oops an error occured
-            ul
-                li
-                    =errors
+    if errors
+        each error in errors
+                h2 Oops an error occured
+                ul
+                    li
+                        =errors
     form(method='post' action=`/books/${book.id}`)        
         p
             label(for='title') Title
