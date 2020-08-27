@@ -42,7 +42,12 @@ app.set("view engine", "pug");
 //uses the routes file to route the user to the proper page
 app.use(routes);
 
-/* Error Handler */
+//404 handler
+app.use((err, req, res, next) => {
+  res.status(404).send('Page cannot be found', { err: err.stack })
+})
+
+/* Global Error Handler */
 app.use((err, req, res, next) => {
   res.locals.error = err
   res.status = err.status

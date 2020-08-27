@@ -75,12 +75,5 @@ router.post('/books/:id/delete', async(req, res) => {
     res.redirect('/');
 })
 
-//handles any routes not specified and routes them to error page
-router.get('*', (req, res, next) => {
-    const error = new Error("This page cannot be found")
-    error.status = 404
-    next(error)
-})
-
 
 module.exports = router
