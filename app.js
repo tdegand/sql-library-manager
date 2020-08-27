@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const Sequelize = require("sequelize")
+const bodyParser = require('body-parser');
+
+//for parsing form data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //check connection to DB
 const sequelize = new Sequelize({

@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Book } = require('./models')
-const Sequelize = require("sequelize");
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 //index page redirects to all books
 router.get('/', (req, res) => {
@@ -19,8 +18,9 @@ router.get('/books/new', (req, res) => {
     res.render('new-book')
 })
 //posts the new book to the database
-router.post('/books/new', (req, res) => {
-    res.render('new-book')
+router.post('/books/new', (req, res) => {  
+        const newBook = Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
+        res.redirect(`/books/${newBook.id}`)
 })
 //shows the book detail form
 router.get('/books/:id', (req, res) => {
