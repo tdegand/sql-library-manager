@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { Book } = require('./models')
-const { Op } = require("sequelize");
 
 //index page redirects to all books
 router.get('/', (req, res) => {
@@ -45,6 +44,12 @@ router.post('/books/:id/delete', async(req, res) => {
         }
     });
     res.redirect('/');
+})
+
+router.get('*', (req, res, next) => {
+    const error = new Error("This page cannot be found")
+    error.status = 404
+    next(error)
 })
 
 
