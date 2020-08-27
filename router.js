@@ -19,8 +19,11 @@ router.get('/books/new', (req, res) => {
 })
 //posts the new book to the database
 router.post('/books/new', (req, res) => {  
-        const newBook = Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
-        res.redirect(`/books/${newBook.id}`)
+    (async () => {
+        const newBook = await Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
+        .then(res.redirect(`/books/${newBook.id}`))
+    })
+    
 })
 //shows the book detail form
 router.get('/books/:id', (req, res) => {
@@ -29,11 +32,11 @@ router.get('/books/:id', (req, res) => {
         }) 
 })
 //updates the book info
-router.post('/books/:id', (req, res) => {
+router.put('/books/:id', (req, res) => {
     res.render('update-book')
 })
 //deletes a book
-router.post('/books/:id/delete', (req, res) => {
+router.delete('/books/:id/delete', (req, res) => {
     res.render('new-book')
 })
 
