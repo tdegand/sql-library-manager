@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Book } = require('./models');
 
-
 /* Handler function to wrap each route. */
 function asyncHandler(cb){
     return async(req, res, next) => {
@@ -37,7 +36,6 @@ router.post('/books/new', asyncHandler(async (req, res) => {
         } catch(error) {
             //displays error messages form validator error produced by sequelize
             if (error.name === "SequelizeValidationError") {
-                console.log(error.errors)
                 res.render('new-book', { errors: error.errors })
             }
         }    
@@ -57,11 +55,10 @@ router.post('/books/:id', async(req, res) => {
                 id: req.params.id
             }
         })
-        res.redirect(`/books/${req.params.id}`)
+        res.redirect('/')
     } catch(error) {
         if (error.name === "SequelizeValidationError") {
             //displays error messages form validator error produced by sequelize
-            console.log(error.errors) 
             await Book.findByPk(req.params.id).then(book => {
                 res.render('update-book', { book, errors: error.errors })
             }) 
