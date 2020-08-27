@@ -1,6 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { Book } = require('./models')
+const { Book } = require('./models');
+
+
+/* Handler function to wrap each route. */
+function asyncHandler(cb){
+    return async(req, res, next) => {
+      try {
+        await cb(req, res, next)
+      } catch(error){
+        res.status(500).send(error);
+      }
+    }
+  }
 
 //index page redirects to all books
 router.get('/', (req, res) => {
@@ -17,15 +29,19 @@ router.get('/books/new', (req, res) => {
     res.render('new-book')
 })
 //posts the new book to the database
-router.post('/books/new', async (req, res) => { 
-        if(req.body.title === null || req.body.author === null || req.body.genre === null || req.body.year === null) {
-            const error = new Error(`${req.body.title} ${req.body.author} ${req.body.genre} ${req.body.year} cannot be empty`)
-            res.render('new-book', { error })
-        } else {
-            const newBook = await Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
+router.post('/books/new', asyncHandler(async (req, res) => { 
+        try {
+            await Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
             res.redirect(`/books`) 
-        }     
-})
+        } catch(error) {
+            if (error.name === "SequelizeValidationError") {
+                console.log(error.message)
+                res.render('new-book', { errors: error.message })
+            }
+        }
+        
+        
+}));
 //shows the book detail form
 router.get('/books/:id', (req, res) => {
         Book.findByPk(req.params.id).then(book => {
@@ -39,7 +55,7 @@ router.post('/books/:id', async(req, res) => {
             id: req.params.id
         }
     })
-    res.redirect(`/books`)
+    res.redirect(`/books/${req.params.id}`)
 })
 //deletes a book
 router.post('/books/:id/delete', async(req, res) => {
