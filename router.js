@@ -23,7 +23,7 @@ router.post('/books/new', async (req, res) => {
             res.render('new-book', { error })
         } else {
             const newBook = await Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
-            res.redirect(`/books/${newBook.id}`) 
+            res.redirect(`/books`) 
         }     
 })
 //shows the book detail form
@@ -39,7 +39,7 @@ router.post('/books/:id', async(req, res) => {
             id: req.params.id
         }
     })
-    res.redirect(`/books/${req.params.id}`)
+    res.redirect(`/books`)
 })
 //deletes a book
 router.post('/books/:id/delete', async(req, res) => {
