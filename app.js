@@ -29,7 +29,6 @@ sequelize.sync({ force: true })
     console.error('Could not create database & tables..')
   }) 
   
-
 //import routes
 const routes = require("./router.js");
 

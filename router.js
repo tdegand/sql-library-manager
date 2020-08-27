@@ -31,16 +31,16 @@ router.get('/books/new', (req, res) => {
 //posts the new book to the database
 router.post('/books/new', asyncHandler(async (req, res) => { 
         try {
+            //takes user input and pushes it to the DB
             await Book.create({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year })
             res.redirect(`/books`) 
         } catch(error) {
+            //displays error messages form validator error produced by sequelize
             if (error.name === "SequelizeValidationError") {
-                console.log(error.message)
-                res.render('new-book', { errors: error.message })
+                console.log(error.errors)
+                res.render('new-book', { errors: error.errors })
             }
-        }
-        
-        
+        }    
 }));
 //shows the book detail form
 router.get('/books/:id', (req, res) => {
@@ -50,12 +50,23 @@ router.get('/books/:id', (req, res) => {
 })
 //updates the book info
 router.post('/books/:id', async(req, res) => {
-    await Book.update({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year}, {
-        where: {
-            id: req.params.id
+    try {
+        //takes user input and pushes it to the DB for updates
+        await Book.update({ title: req.body.title, author: req.body.author, genre: req.body.genre, year: req.body.year}, {
+            where: {
+                id: req.params.id
+            }
+        })
+        res.redirect(`/books/${req.params.id}`)
+    } catch(error) {
+        if (error.name === "SequelizeValidationError") {
+            //displays error messages form validator error produced by sequelize
+            console.log(error.errors) 
+            await Book.findByPk(req.params.id).then(book => {
+                res.render('update-book', { book, errors: error.errors })
+            }) 
         }
-    })
-    res.redirect(`/books/${req.params.id}`)
+    }
 })
 //deletes a book
 router.post('/books/:id/delete', async(req, res) => {
@@ -67,6 +78,7 @@ router.post('/books/:id/delete', async(req, res) => {
     res.redirect('/');
 })
 
+//handles any routes not specified and routes them to error page
 router.get('*', (req, res, next) => {
     const error = new Error("This page cannot be found")
     error.status = 404

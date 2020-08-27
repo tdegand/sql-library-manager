@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "Please enter a Title"
+          msg: "Title Cannot be Empty, Please try again"
         },
       }
     },
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Please enter an Author"
+          msg: "Author Cannot be Empty, Please try again"
         },
       }
     },
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          msg: "Please enter a Genre"
+          msg: "Genre Cannot be Empty, Please try again"
         },
       }
     },
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: {
-          msg: "Please enter a year"
+          msg: "Year Cannot be Empty, Please try again"
         },
       }
     },
