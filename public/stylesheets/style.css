@@ -1,16 +1,17 @@
 body {
   padding: 10px 50px 50px;
   height: inherit;
-  background-color: #0D4F61;
+  background-color: #C6CDC1;
   font: 18px "Garamond", serif;
 }
 td a {
-  color: #000;
-  text-decoration: underline #000;
+  color: #397d35;
+  transition: 0.4s;
 }
 
 td a:hover{
-  text-decoration: underline #fff;
+  color: #1b2f19;
+  text-decoration: underline #1b2f19 ;
 }
 
 a {
@@ -26,7 +27,7 @@ a {
 
 a.button, input[type=submit] {
   color: white;
-  background: #019875;
+  background: #63A15F;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
@@ -44,7 +45,7 @@ input[type=submit] {
 }
 
   a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
+    background-color: #306b2d;
   }
 
 p {
@@ -59,11 +60,11 @@ ul {
 }
 
 h1 {
-  color: #fff;
+  color: #000;
 }
 
 h2 {
-  color: #fff;
+  color: #000;
   border-top: 2px solid #e7e7e7;
   padding-top: 20px;
 }
@@ -76,20 +77,21 @@ th {
 
 tr {
   min-height: 50px;
-  background: #66B5A7;
+  background: #F5F6F0;
 }
 
 tr:nth-child(2n) {
-  background: #529c8f;
+  background: #d8d8d6;
 }
 
 td {
   padding: 5px 20px 5px 10px;
-  color: #fff;
+  color: #000;
+  font-weight: 600;
 }
 
 label {
-  color: #fff;
+  color: #000;
   font-weight: bold;
   min-width: 130px;
   display: inline-block;
@@ -123,5 +125,5 @@ table {
 
 .error {
   color: rgb(255 0 0);
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+  text-shadow: 1px 0px 0px rgba(0, 0, 0, .2);
 }
